@@ -47,16 +47,70 @@
  */
 export function createPaanOrder(basePaan, customizations) {
   // Your code here
+  if (typeof (basePaan) !== 'object' || basePaan == null)
+    return {}
+
+  if (typeof customizations !== 'object')
+    // return Object.assign({}, basePaan)
+    return { ...basePaan }
+
+  return Object.assign({}, basePaan, customizations)
 }
 
 export function freezeMenu(menu) {
   // Your code here
+  if (typeof menu !== 'object' || menu === null)
+    return {}
+
+  return Object.freeze(menu)
 }
 
 export function updatePrices(menu, increase) {
   // Your code here
+  // KeyValue ka array banayege
+  // uske upar map karke, har subarray element 1st index mein increase add karege
+
+  if (typeof menu !== 'object' || typeof increase !== 'number' || menu === null)
+    return {}
+
+  // let keyValueArray = Object.entries(menu)
+  // // console.log("Increase : ", increase);
+  // // console.log("KeyValue Array Before : ", keyValueArray);
+  // keyValueArray.map((currentElement) => {
+  //   currentElement[1] += increase
+  // })
+  // // console.log("KeyValue Array After : ", keyValueArray);
+
+  // return Object.fromEntries(keyValueArray)
+
+  return Object.fromEntries(
+    Object
+      .entries(menu)
+      .map(([key, value]) => [key, value + increase])
+  )
+
 }
 
 export function mergeDailySpecials(regularMenu, specialsMenu) {
   // Your code here
+
+
+  if (typeof regularMenu !== 'object' || regularMenu === null || Array.isArray(regularMenu)) {
+    regularMenu = {}
+    // return { ...regularMenu, ...specialsMenu }
+  }
+
+  if (typeof specialsMenu !== 'object' || specialsMenu === null || Array.isArray(specialsMenu)) {
+    specialsMenu = {}
+    // return { ...regularMenu, ...specialsMenu }
+  }
+
+  return { ...regularMenu, ...specialsMenu }
+
+  // const regular = (typeof regularMenu === 'object' && regularMenu !== null && !Array.isArray(regularMenu)) ? regularMenu : {}
+
+  // const special = (typeof specialsMenu === 'object' && specialsMenu !== null && !Array.isArray(specialsMenu)) ? specialsMenu : {}
+
+  // return { ...regular, ...special }
+
 }

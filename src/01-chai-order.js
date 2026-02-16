@@ -45,22 +45,49 @@
  *   shoutChaiOrder("masala chai")          // => "MASALA CHAI"
  *   hasSpecialIngredient("Elaichi Chai", "elaichi")  // => true
  */
+const isValidIngredient = (ingredient) => ingredient && typeof ingredient == 'string'
+const isValidOrder = (order) => order && typeof order == 'string'
 export function getChaiOrderLength(order) {
   // Your code here
+  if (typeof order !== "string") return -1
+  return order.trim().length
 }
 
 export function shoutChaiOrder(order) {
   // Your code here
+  if (typeof order !== 'string' || order.trim() == "")
+    return ""
+
+  return order.trim().toUpperCase()
 }
 
 export function whisperChaiOrder(order) {
   // Your code here
+  if (typeof order !== 'string' || order.trim() == "") return ""
+
+  return order.trim().toLowerCase()
 }
 
 export function hasSpecialIngredient(order, ingredient) {
   // Your code here
+  // if (typeof order !== 'string' || order.trim() == "") return false
+  if (!isValidOrder(order) || !isValidIngredient(ingredient))
+    if (typeof order !== 'string' || typeof ingredient !== 'string' || ingredient.trim() == "" || order.trim() == "")
+      return false
+  // return order.trim().toLowerCase().includes(ingredient.toLowerCase())
+  return order.trim().toLowerCase().includes(ingredient.toLowerCase());
+  // let lowercaseIngredient = ingredient.toLowerCase()
+
 }
 
 export function getFirstAndLastChar(order) {
   // Your code here
+  if (typeof order !== 'string' || order.trim() == "") return null
+  let trimmedChar = order.trim()
+  let firstChar = trimmedChar.charAt(0)
+  let lastChar = trimmedChar.at(-1)
+  return {
+    first: firstChar,
+    last: lastChar
+  }
 }

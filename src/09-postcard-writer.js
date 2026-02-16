@@ -53,20 +53,64 @@
  */
 export function writePostcard(sender, receiver, message) {
   // Your code here
+
+  if (typeof sender !== 'string' ||
+    typeof receiver !== 'string' ||
+    typeof message !== 'string' ||
+    [sender, receiver, message].map((i) => i.trim()).some(i => i == '')) {
+    return ""
+  }
+
+  const postcard = `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`;
+  return postcard
 }
 
 export function isValidPincode(code) {
   // Your code here
+  if (typeof code !== 'string' ||
+    code.startsWith("0") ||
+    code.length !== 6 ||
+    !(/^\d+$/.test(code))
+  ) {
+    return false
+  }
+
+  return true
 }
 
 export function formatPostcardField(label, value, width) {
   // Your code here
+  if (typeof (label) !== 'string' ||
+    typeof (value) !== 'string') {
+    return ""
+  }
+
+  if (width && typeof (width) === 'number' && Number.isInteger(width)) {
+    return label.padEnd(width) + ": " + value
+  } else {
+    return label.padEnd(12) + ": " + value
+  }
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
+  if (typeof (address) !== 'string' ||
+    typeof (stateCode) !== 'string' ||
+    !address.endsWith(stateCode)) {
+    return false
+  }
+  return true
 }
 
 export function countVowels(message) {
   // Your code here
+  if (typeof (message) !== 'string' || message === '') {
+    return 0
+  }
+  const count = message.match(/[aeiouAEIOU]/g)
+  if (typeof count === null || Number.isNaN(count) || !count) {
+    return 0
+  }
+
+  return count.length // Had to return length & was returning count
 }

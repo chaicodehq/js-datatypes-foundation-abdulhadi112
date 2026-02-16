@@ -54,20 +54,51 @@
  */
 export function getFamilyNames(registry) {
   // Your code here
+  if (typeof registry !== 'object' || registry === null || Array.isArray(registry))
+    return []
+  return Object.keys(registry)
 }
 
 export function getAllFamilies(registry) {
   // Your code here
+  if (typeof registry !== 'object' || registry === null)
+    return []
+  return Object.values(registry)
 }
 
 export function getRationCardEntries(registry) {
   // Your code here
+  if (typeof registry !== 'object' || registry === null)
+    return []
+  return Object.entries(registry)
 }
 
 export function hasRationCard(registry, cardId) {
   // Your code here
+  if (typeof registry !== 'object' || registry === null || typeof (cardId) !== 'string')
+    return false
+  // console.log('Registery : ', registry);
+  // console.log("cardID : ", cardId);
+  // console.log("reg mein cardid hai :", registry[cardId] === cardId ? "YES" : "NO");
+  // This is return false bcoz its checking {...} === RC001. registry[cardId] gives the value joh registry obj mein cardId naam ki property mein hai i.e object
+  // console.log('registry[cardId] : ', registry[cardId]);
+
+
+
+  return registry.hasOwnProperty(cardId)
+  // return registry["cardId"] == cardId
 }
 
 export function removeRationCard(registry, cardId) {
   // Your code here
+  if (typeof (registry) !== 'object' || typeof (cardId) !== 'string' || registry === null || Array.isArray(registry))
+    return false
+
+
+  if (registry.hasOwnProperty(cardId)) {
+    delete registry[cardId] // registry.cardId & registry[cardId] mein difference kya hai 
+    return true
+  }
+
+  return false
 }

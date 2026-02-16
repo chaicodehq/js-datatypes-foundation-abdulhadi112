@@ -52,20 +52,52 @@
  */
 export function getItemNames(items) {
   // Your code here
+  if (!Array.isArray(items))
+    return []
+  return items.map((item) => item.name)
 }
 
 export function getAffordableItems(items, maxPrice) {
   // Your code here
+  if (!Array.isArray(items) || typeof (maxPrice) !== 'number')
+    return []
+
+  return items.filter((item) => item.price <= maxPrice)
 }
 
 export function calculateTotal(items) {
   // Your code here
+  if (!Array.isArray(items) || items.length == 0)
+    return 0
+
+  return items.reduce((acc, currentElement) => {
+    return acc + (currentElement.price * currentElement.qty)
+  }, 0)
 }
 
 export function sortByPrice(items, ascending) {
   // Your code here
+  if (!Array.isArray(items))
+    return []
+
+  if (ascending == true)
+    return [...items].sort((a, b) => a.price - b.price)
+  else
+    return [...items].sort((a, b) => b.price - a.price)
 }
 
 export function formatBill(items) {
   // Your code here
+  if (!Array.isArray(items) || items.length == 0)
+    return ""
+
+  let result = items.map((item) => {
+    console.log("item: ", item)
+    // return item = String(`${item.name} x ${item.qty} = Rs.${item.price * item.qty}`)
+    return item = `${item.name} x ${item.qty} = Rs.${item.price * item.qty}`
+    // console.log("item after conversion & type: ", typeof (item))
+
+  })
+  // console.log('Result : ', result)
+  return result.join("\n")
 }
